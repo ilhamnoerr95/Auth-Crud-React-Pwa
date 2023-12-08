@@ -1,47 +1,74 @@
-import { Button, Checkbox, Form, Input } from "antd";
-import React from "react";
+import { Button, Form, Input, message } from "antd";
+import { Link } from "react-router-dom";
+import mutationLogin from "../queries/login";
+import { useMutation } from "@tanstack/react-query";
 
 type FieldType = {
-	username?: string;
+	email?: string;
 	password?: string;
-	remember?: string;
+};
+
+const layout = {
+	labelCol: { span: 8 },
+	wrapperCol: { span: 16 },
 };
 
 const Login = () => {
 	const [form] = Form.useForm();
+	const postLogin = useMutation({
+		...mutationLogin(),
+		onSuccess: (res: any) => {
+			console.log(res);
+			if (res.error) {
+				message.error(res.error);
+			} else {
+				message.success("Login successful!");
+			}
+		},
+		onError: (err: any) => {
+			console.log(err);
+			message.error(err);
+		},
+	});
+
+	const onFinsih = (values: any) => {
+		postLogin.mutate({ data: values });
+	};
 
 	return (
-		<Form form={form}>
-			<Form.Item<FieldType>
-				label="Username"
-				name="username"
-				rules={[{ required: true, message: "Please input your username!" }]}
+		<div className="wrapper">
+			<h1 style={{ textAlign: "center" }}>LOGIN</h1>
+			<Form
+				form={form}
+				{...layout}
+				style={{ maxWidth: 600 }}
+				onFinish={onFinsih}
 			>
-				<Input />
-			</Form.Item>
+				<Form.Item<FieldType>
+					label="Email"
+					name="email"
+					rules={[{ required: true, message: "Please input your email!" }]}
+				>
+					<Input />
+				</Form.Item>
 
-			<Form.Item<FieldType>
-				label="Password"
-				name="password"
-				rules={[{ required: true, message: "Please input your password!" }]}
-			>
-				<Input.Password />
-			</Form.Item>
-
-			<Form.Item<FieldType>
-				name="remember"
-				valuePropName="checked"
-				wrapperCol={{ offset: 8, span: 16 }}
-			>
-				<Checkbox>Remember me</Checkbox>
-			</Form.Item>
-
-			<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-				<Button type="primary" htmlType="submit">
-					Submit
-				</Button>
-			</Form.Item>
-		</Form>
+				<Form.Item<FieldType>
+					label="Password"
+					name="password"
+					rules={[{ required: true, message: "Please input your password!" }]}
+				>
+					<Input.Password />
+				</Form.Item>
+				<Form.Item wrapperCol={{ offset: 8 }}>
+					<Link to="/register">Register</Link>
+				</Form.Item>
+				<Form.Item wrapperCol={{ offset: 8 }}>
+					<Button type="primary" htmlType="submit">
+						Submit
+					</Button>
+				</Form.Item>
+			</Form>
+		</div>
 	);
 };
 

@@ -1,5 +1,14 @@
 body {
-  background-color: theme("colors.slate.50");
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+	margin: 0 auto;
+}
+
+.wrapper {
+	width: 30%;
+	margin: 0 auto;
+	min-height: 99vh;
+	flex-direction: column;
+	display: flex;
+	justify-content: center;
 }

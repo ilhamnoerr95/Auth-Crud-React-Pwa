@@ -1,11 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "../pages/login.tsx";
+import Register from "../pages/register.tsx";
+import NotFound from "../pages/notFound.tsx";
 
 function Router() {
 	return (
 		<Routes>
-			<Route path="/" element={<Login />}></Route>
-			<Route path="/test" element={<h1>test 2</h1>}></Route>
+			<Route path="/" element={<Login />} />
+			<Route path="/register" element={<Register />} />
+			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
 }

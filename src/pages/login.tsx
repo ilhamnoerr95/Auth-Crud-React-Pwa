@@ -1,7 +1,14 @@
-import { Button, Form, Input, message } from "antd";
 import { Link } from "react-router-dom";
+
+// antd
+import { Button, Form, Input, message } from "antd";
+
+// queries
 import mutationLogin from "../queries/login";
 import { useMutation } from "@tanstack/react-query";
+
+// libs
+import { useMyNavigation } from "src/libs/utlis";
 
 type FieldType = {
 	email?: string;
@@ -15,14 +22,19 @@ const layout = {
 
 const Login = () => {
 	const [form] = Form.useForm();
+	const { home } = useMyNavigation();
+
 	const postLogin = useMutation({
 		...mutationLogin(),
 		onSuccess: (res: any) => {
-			console.log(res);
 			if (res.error) {
 				message.error(res.error);
 			} else {
+				localStorage.setItem("token", res.token);
 				message.success("Login successful!");
+
+				// if sukses redirect to home
+				home();
 			}
 		},
 		onError: (err: any) => {

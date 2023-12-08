@@ -1,0 +1,38 @@
+$breakpoints: (
+  mobile: 0px,
+  tablet: 1023px,
+);
+
+@mixin mini-mobile() {
+}
+
+@mixin mobile() {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media (min-width: 769px) and (max-width: 1023px) {
+    @content;
+  }
+}
+@mixin laptop() {
+  @media (min-width: 1024px) and (max-width: 1367px) {
+    @content;
+  }
+}
+
+@mixin fhd-laptop() {
+  @media (min-width: 1368px) {
+    @content;
+  }
+}
+
+@mixin media($keys...) {
+  @each $key in $keys {
+    @media (max-width: map-get($breakpoints, $key)) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+/** color variabels */
+$neutral: (
+	1: "#FFFFFF",
+	2: "#F9FAFB",
+	3: "#F0F3F7",
+	4: "#DFE3E8",
+	5: "#C4CDD5",
+	6: "#919EAB",
+	7: "#637381",
+	8: "#323942",
+	9: "#1A1E23",
+	10: "#13161A",
+);
+
+$red: (
+	1: "#FCEFF2",
+	2: "#F7D3DC",
+	3: "#F3BDCA",
+	4: "#EB92A7",
+	5: "#E66983",
+	6: "#DB284E",
+	7: "#C22046",
+	8: "#AC1D3E",
+	9: "#971937",
+	10: "#83182F",
+);
+
+$background: (
+	primary: map-get($neutral, 1),
+	secondary: map-get($neutral, 2),
+	neutral: map-get($neutral, 3),
+	neutral-alt: map-get($neutral, 4),
+	accent: map-get($red, 6),
+	accent-hover: map-get($red, 7),
+	disabled: map-get($neutral, 3),
+	accent-alt: map-get($red, 1),
+	accent-soft: map-get($red, 4),
+	neutral-dark: map-get($neutral, 6),
+	scrim: map-get($red, 6),
+);
+:root {
+	@each $background, $background-value in $background {
+		--bg-#{$background}: #{$background-value};
+	}
+}

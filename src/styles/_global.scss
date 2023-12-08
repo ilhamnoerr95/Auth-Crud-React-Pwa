@@ -1,7 +1,10 @@
+@use "formula";
+
 body {
 	box-sizing: border-box;
 	scroll-behavior: smooth;
 	margin: 0 auto;
+	min-height: 99vh;
 }
 
 .wrapper {
@@ -11,4 +14,9 @@ body {
 	flex-direction: column;
 	display: flex;
 	justify-content: center;
+}
+
+.wrapper-main {
+	max-width: 100%;
+	min-height: 99vh;
 }

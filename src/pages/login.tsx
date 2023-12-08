@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // antd
 import { Button, Form, Input, message } from "antd";
@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 
 // libs
 import { useMyNavigation } from "src/libs/utlis";
+import { useEffect } from "react";
 
 type FieldType = {
 	email?: string;
@@ -23,6 +24,9 @@ const layout = {
 const Login = () => {
 	const [form] = Form.useForm();
 	const { home } = useMyNavigation();
+
+	const token = localStorage.getItem("token");
+	const navigate = useNavigate();
 
 	const postLogin = useMutation({
 		...mutationLogin(),
@@ -44,8 +48,16 @@ const Login = () => {
 	});
 
 	const onFinsih = (values: any) => {
+		console.log(values);
 		postLogin.mutate({ data: values });
 	};
+
+	// hook
+	useEffect(() => {
+		if (token) {
+			navigate("/home");
+		}
+	}, [token, navigate]);
 
 	return (
 		<div className="wrapper">
@@ -75,7 +87,11 @@ const Login = () => {
 					<Link to="/register">Register</Link>
 				</Form.Item>
 				<Form.Item wrapperCol={{ offset: 8 }}>
-					<Button type="primary" htmlType="submit">
+					<Button
+						type="primary"
+						htmlType="submit"
+						loading={postLogin.isPending}
+					>
 						Submit
 					</Button>
 				</Form.Item>

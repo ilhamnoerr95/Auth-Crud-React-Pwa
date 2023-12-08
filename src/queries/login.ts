@@ -8,7 +8,7 @@ export const mutationLogin = () => ({
 	mutationFn: async (payload: PayloadAuth) => {
 		const { data } = payload;
 
-		const url = process.env.REACT_APP_API_AUTH + "/login";
+		const url = "https://reqres.in/api/login";
 
 		const response = await apiLogin(data, url as string);
 

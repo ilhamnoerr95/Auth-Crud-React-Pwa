@@ -5,21 +5,23 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
+import { BrowserRouter } from "react-router-dom";
 // Create a client
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+	document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    {" "}
-    <QueryClientProvider client={queryClient}>
-      <App />
-      <ReactQueryDevtools initialIsOpen={false} position="right" />
-    </QueryClientProvider>
-  </React.StrictMode>
+	<React.StrictMode>
+		{" "}
+		<BrowserRouter>
+			<QueryClientProvider client={queryClient}>
+				<App />
+				<ReactQueryDevtools initialIsOpen={false} position="right" />
+			</QueryClientProvider>
+		</BrowserRouter>
+	</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -93,7 +93,9 @@ const Home: React.FC = () => {
 		<div className="wrapper">
 			<Header />
 			<div>
-				<Button onClick={() => setCreate(true)}>New</Button>
+				<Button style={{ marginTop: "1rem" }} onClick={() => setCreate(true)}>
+					New
+				</Button>
 				{create && (
 					<>
 						<Form form={form} style={{ margin: "1rem 0" }} onFinish={createNew}>
